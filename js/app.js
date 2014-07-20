@@ -1,7 +1,10 @@
 /** @jsx React.DOM */
 
 config = {};
-config.options = [];
+config.options = [
+    [{parameter: "tracingRadiusCycles",values: linspace(20537.5,20538.5,21)}
+    ]
+];
 
 // Prepare mixins which allow React components to trigger actions and read/sync-with data stores
 var FluxMixin = Fluxxor.FluxMixin(React),
@@ -20,18 +23,20 @@ var App = React.createClass ({
     render: function () {
         var thumbnails = [];
         for (var i = 0; i < this.state.patterns.length; i++) {
-            thumbnails.push(<Guilloche id={i} size={150} pattern={this.state.patterns[i]} options={config.options[i]}/>);
+            thumbnails.push(<Guilloche id={i} size={150} pattern={this.state.patterns[i]} options={config.options[i]} drawParams={{opacity:.05,lineWidth:1}} update={i==this.state.activePattern}/>);
         };
         return (
             <div id="main">
                 <div id="container-1">
-                    <Guilloche id={-1} size={750} pattern={this.state.patterns[this.state.activePattern]}/>
+                    <Guilloche id={-1} size={750} pattern={this.state.patterns[this.state.activePattern]} drawParams={{opacity:.1,lineWidth:1}} update={true}/>
                 </div>
                 <div id="container-2">
-                    <h1>Guilloche Gallery</h1>
+                    <h1>GUILLOCHE GALLERY</h1>
                     <h2>made by <a href="#">@dela3499</a> and inspired by <a href="http://www.subblue.com/projects/guilloche">subblue</a> 
                     </h2>
+                    <div id="thumbnail-container">
                     {thumbnails}
+                    </div>
                 </div>
             </div>
         );
@@ -44,7 +49,10 @@ var Guilloche = React.createClass ({
     },
     componentDidUpdate: function () {
         this.draw();
-    },    
+    },  
+    shouldComponentUpdate: function () {
+        return this.props.update;
+    },
     render: function () {
         return (
             <canvas height={this.props.size} width={this.props.size} onMouseEnter={this.play} onMouseLeave={this.pause}></canvas>
@@ -71,8 +79,8 @@ var Guilloche = React.createClass ({
             console.log([x,y]);
         };
         c.clearRect(0,0,this.props.size,this.props.size);
-        c.strokeStyle = "rgba(255,255,255," + 0.0051*Math.log(this.props.size)+ ")";
-        c.lineWidth = 1;
+        c.strokeStyle = "rgba(255,255,255," + this.props.drawParams.opacity + ")";
+        c.lineWidth = this.props.drawParams.lineWidth;
         for (var i = 0; i < x.length - 1; i++) {
             c.beginPath();
             c.moveTo(x[i],y[i]);
@@ -121,7 +129,7 @@ var AppStore = Fluxxor.createStore({
                 var options = {};
                 if (anim.options) {
                     anim.options.map(function (x) {
-                        options[x.parameter] = x.values[Math.mod(anim.keyframe,x.values.length)]
+                        options[x.parameter] = x.values[anim.keyframe % x.values.length]
                     })
                 };
                 store.patterns[anim.id] = getGuilloche(options);
