@@ -5,8 +5,9 @@
     <script src="js/react/build/react.js"></script>
     <script src="js/react/build/JSXTransformer.js"></script>
     <script src="js/fluxxor.js"></script>
+    <script src="js/guilloche.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
-	<link rel="stylesheet" type="text/css" href="css/arcsong.css">
+<!--	<link rel="stylesheet" type="text/css" href="css/arcsong.css">-->
     <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -14,3 +15,32 @@
     <script type='text/jsx' src="js/app.js"></script>
 </body>
 </html>
+
+<style>
+    #main {
+        height: 100vh;
+        width: 100vw;
+    }
+    #container-1 {
+        width: 70%;
+        height: 100%;
+        background: green;
+        float:left;
+    }
+    #container-2 {
+        float:left;
+        width: 30%;
+        height: 100%;
+        background: red;
+    }
+    #container-1 canvas {
+        background: blue;
+    }
+    #container-2 canvas {
+        background: purple;
+        height: 150px;
+        width: 150px; 
+        border: 1px solid black;
+        box-sizing: border-box;
+    }
+</style>
