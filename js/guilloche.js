@@ -75,7 +75,7 @@
             b = options.rollingRadius || 0.9085021000210002,
             hr = options.tracingRadius || 150,
             hc = options.tracingRadiusCycles || 5500.0,
-            ha = options.tracingRadiusAmplitude || 0.5,
+            ha = options.tracingRadiusAmplitude || 0.0,
             m = options.multiplier || 1000,
             r = options.range || 2*Math.PI,
             n = options.nPoints || 9039,

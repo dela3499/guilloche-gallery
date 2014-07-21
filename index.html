@@ -6,6 +6,7 @@
     <script src="js/react/build/JSXTransformer.js"></script>
     <script src="js/fluxxor.js"></script>
     <script src="js/guilloche.js"></script>
+    <script src="js/config.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 <!--	<link rel="stylesheet" type="text/css" href="css/arcsong.css">-->
     <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -23,6 +24,11 @@
         font-family: 'Josefin Sans', sans-serif;
         color: white;
         text-align: center;
+        background: url(img/png/49.png);
+    }
+    a {
+        color: grey;
+        text-decoration: none;
     }
     h1 {
         font-size: 40px;
@@ -38,7 +44,8 @@
     #container-1 {
         width: 70%;
         height: 100%;
-        background: black;
+/*        background: url(img/png/49.png);*/
+/*        49*/
         float:left;
         text-align: center;
         
@@ -47,17 +54,25 @@
         float:left;
         width: 30%;
         height: 100%;
-        background: black;
+/*        background: black;*/
+/*        background: url(img/png/49.png);*/
     }
     #container-1 canvas {
         margin-top: 20px;
-        background: black;
         display:inline;
     }
     #container-2 canvas {
         height: 150px;
         width: 150px; 
+        opacity: 0.4;
+        transition-duration: .5s;
     }
+    #container-2 canvas:hover {
+        opacity: 0.7;
+        transition-property: all;
+        transition-duration: .5s;
+    }
+    
     #thumbnail-container {
         width: 450px;
         margin: 0 auto;

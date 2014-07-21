@@ -1,10 +1,6 @@
 /** @jsx React.DOM */
 
-config = {};
-config.options = [
-    [{parameter: "tracingRadiusCycles",values: linspace(20537.5,20538.5,21)}
-    ]
-];
+
 
 // Prepare mixins which allow React components to trigger actions and read/sync-with data stores
 var FluxMixin = Fluxxor.FluxMixin(React),
@@ -28,7 +24,7 @@ var App = React.createClass ({
         return (
             <div id="main">
                 <div id="container-1">
-                    <Guilloche id={-1} size={750} pattern={this.state.patterns[this.state.activePattern]} drawParams={{opacity:.1,lineWidth:1}} update={true}/>
+                    <Guilloche id={-1} size={750} pattern={this.state.patterns[this.state.activePattern]} drawParams={{opacity:.05,lineWidth:1}} update={true}/>
                 </div>
                 <div id="container-2">
                     <h1>GUILLOCHE GALLERY</h1>
@@ -75,9 +71,6 @@ var Guilloche = React.createClass ({
         var c = this.getDOMNode().getContext('2d'),
             x = addToArray(scaleArray(this.props.pattern.x,this.props.size),this.props.size/2),
             y = addToArray(scaleArray(this.props.pattern.y,this.props.size),this.props.size/2);
-        if (this.props.id == 0) {
-            console.log([x,y]);
-        };
         c.clearRect(0,0,this.props.size,this.props.size);
         c.strokeStyle = "rgba(255,255,255," + this.props.drawParams.opacity + ")";
         c.lineWidth = this.props.drawParams.lineWidth;
@@ -103,7 +96,6 @@ var AppStore = Fluxxor.createStore({
         for (var i = 0; i < 12; i++) {
             this.patterns.push(getGuilloche({}));
         };
-        this.activePattern = -1;
         requestAnimationFrame(this.update);
     },
     createAnim: function (p) {
