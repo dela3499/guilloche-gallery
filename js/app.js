@@ -24,10 +24,12 @@ var App = React.createClass ({
         return (
             <div id="main">
                 <div id="ui-container">
-                    <div id="ui-background"></div>        
-                    <h1>GUILLOCHE GALLERY</h1>
-                    <h2>made by <a href="#" target="_blank">@dela3499</a> and inspired by <a href="http://www.subblue.com/projects/guilloche" target="_blank" >subblue</a> 
-                    </h2>
+                    <div id="text-container">
+                        <div id="ui-background"></div>        
+                        <h1>GUILLOCHE GALLERY</h1>
+                        <h2>made by <a href="#" target="_blank">@dela3499</a> and inspired by <a href="http://www.subblue.com/projects/guilloche" target="_blank" >subblue</a> 
+                        </h2>
+                    </div>
                     <div id="thumbnail-container">
                     {thumbnails}
                     </div>
