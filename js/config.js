@@ -2,21 +2,21 @@ config = {};
 config.options = [
     [
         {parameter: "fixedRadius", values: [100]},
-        {parameter: "rollingRadius", values: [0.9085021000210002]},
-        {parameter: "tracingRadius", values: [150]},
-        {parameter: "tracingRadiusCycles", values: linspace(20537.5,20538.5,100)},
-        {parameter: "tracingRadiusAmplitude", values: [0.5]},
-        {parameter: "multiplier", values: [1000]},
-        {parameter: "nPoints", values: [9039]}    
-    ],
-    [
-        {parameter: "fixedRadius", values: [100]},
         {parameter: "rollingRadius", values: linspace(.908501,.908502,50)},
         {parameter: "tracingRadius", values: [100]},
         {parameter: "tracingRadiusCycles", values: [5500]},
         {parameter: "tracingRadiusAmplitude", values: [0.3]},
         {parameter: "multiplier", values: [1000]},
         {parameter: "nPoints", values: [9000]}
+    ],    
+    [
+        {parameter: "fixedRadius", values: [100]},
+        {parameter: "rollingRadius", values: [0.9085021000210002]},
+        {parameter: "tracingRadius", values: [150]},
+        {parameter: "tracingRadiusCycles", values: linspace(20537.5,20538.5,100)},
+        {parameter: "tracingRadiusAmplitude", values: [0.5]},
+        {parameter: "multiplier", values: [1000]},
+        {parameter: "nPoints", values: [9039]}    
     ],
     [
         {parameter: "fixedRadius", values: [100]},

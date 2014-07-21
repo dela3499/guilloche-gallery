@@ -11,11 +11,19 @@ var App = React.createClass ({
     mixins: [FluxMixin, StoreWatchMixin("AppStore")],
     getStateFromFlux: function () {
         var flux = this.getFlux();
+        console.log("getting state from flux");
+        console.log(flux.store("AppStore").patterns.map(function (p) {return p.x.length;}));
         return {
             activePattern: flux.store("AppStore").activePattern,
             patterns: flux.store("AppStore").patterns
         }
+    },  
+    componentWillMount: function () {
+        console.log("APP will mount");
     },    
+    componentDidMount: function () {
+        console.log("APP did mount");
+    },
     render: function () {
         var thumbnails = [];
         for (var i = 0; i < this.state.patterns.length; i++) {
@@ -41,12 +49,20 @@ var App = React.createClass ({
 var Guilloche = React.createClass ({
     mixins: [FluxChildMixin],
     componentWillMount: function () {
+        console.log("componentWillMount");
+//        this.createAnimation();
+    },
+    componentDidMount: function () {
+        console.log("componentDidMount");    
         this.createAnimation();
+        this.draw();
     },
     componentDidUpdate: function () {
+        console.log("componentDidUpdate");
         this.draw();
     },  
     shouldComponentUpdate: function () {
+//        return false;
         return this.props.update;
     },
     render: function () {
@@ -68,6 +84,8 @@ var Guilloche = React.createClass ({
         this.getFlux().actions.pause(this.props.id);
     },
     draw: function (c) {
+        var props = this.props;
+        console.log(props);
         var c = this.getDOMNode().getContext('2d'),
             x = addToArray(scaleArray(this.props.pattern.x,this.props.size),this.props.size/2),
             y = addToArray(scaleArray(this.props.pattern.y,this.props.size),this.props.size/2);
@@ -93,21 +111,33 @@ var AppStore = Fluxxor.createStore({
         );        
         this.animations = [];
         this.patterns = [];
+        this.activePattern = 0;
         for (var i = 0; i < 12; i++) {
             this.patterns.push(getGuilloche({}));
         };
+        console.log("INITIALIZING APPSTORE");
         requestAnimationFrame(this.update);
     },
     createAnim: function (p) {
+        console.log("creating animation for: " + p.id);
         this.animations[p.id] = {
             id: p.id,
             keyframe: 0,
             playing: false,
             options: p.options
-        };  
+        };
+        var options = {},
+            anim = this.animations[p.id];
+        if (anim.options) {
+            anim.options.map(function (x) {
+                options[x.parameter] = x.values[0];
+            })
+        };
+        this.patterns[p.id] = getGuilloche(options);
+//        console.log("UPDATE");
+        this.emit('change');
     },
     playAnim: function (p) {
-        var anims = this.animations;
         this.animations[p.id].playing = true;
         this.activePattern = p.id;
     },
@@ -115,13 +145,14 @@ var AppStore = Fluxxor.createStore({
         this.animations[p.id].playing = false;
     },
     update: function () {
+        console.log("updating store");
         var store = this;
         this.animations.map(function (anim) {
             if (anim.playing) {
                 var options = {};
                 if (anim.options) {
                     anim.options.map(function (x) {
-                        options[x.parameter] = x.values[anim.keyframe % x.values.length]
+                        options[x.parameter] = x.values[anim.keyframe % x.values.length];
                     })
                 };
                 store.patterns[anim.id] = getGuilloche(options);
