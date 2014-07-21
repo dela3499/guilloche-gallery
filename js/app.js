@@ -27,14 +27,12 @@ var App = React.createClass ({
     render: function () {
         var thumbnails = [];
         for (var i = 0; i < this.state.patterns.length; i++) {
-            thumbnails.push(<Guilloche id={i} size={150} pattern={this.state.patterns[i]} options={config.options[i]} drawParams={{opacity:.05,lineWidth:1}} update={i==this.state.activePattern}/>);
+            thumbnails.push(<Guilloche id={i} size={150} pattern={this.state.patterns[i]} options={config.options[i]} drawParams={{opacity:.05,lineWidth:1,color:"black"}} update={i==this.state.activePattern}/>);
         };
         return (
             <div id="main">
-                <div id="container-1">
-                    <Guilloche id={-1} size={750} pattern={this.state.patterns[this.state.activePattern]} drawParams={{opacity:.05,lineWidth:1}} update={true}/>
-                </div>
-                <div id="container-2">
+                <div id="ui-container">
+                    <div id="ui-background"></div>        
                     <h1>GUILLOCHE GALLERY</h1>
                     <h2>made by <a href="#">@dela3499</a> and inspired by <a href="http://www.subblue.com/projects/guilloche">subblue</a> 
                     </h2>
@@ -42,6 +40,9 @@ var App = React.createClass ({
                     {thumbnails}
                     </div>
                 </div>
+                <div id="display-container">
+                    <Guilloche id={-1} size={750} pattern={this.state.patterns[this.state.activePattern]} drawParams={{opacity:.05,lineWidth:1,color:"black"}} update={true}/>
+                </div>                            
             </div>
         );
     }
@@ -90,7 +91,12 @@ var Guilloche = React.createClass ({
             x = addToArray(scaleArray(this.props.pattern.x,this.props.size),this.props.size/2),
             y = addToArray(scaleArray(this.props.pattern.y,this.props.size),this.props.size/2);
         c.clearRect(0,0,this.props.size,this.props.size);
-        c.strokeStyle = "rgba(255,255,255," + this.props.drawParams.opacity + ")";
+        var strokeColor = 255;
+        if (this.props.drawParams.color == "black") {
+            strokeColor = 0;
+        };
+            
+        c.strokeStyle = "rgba(" + strokeColor + "," + strokeColor + "," + strokeColor + "," + this.props.drawParams.opacity + ")";
         c.lineWidth = this.props.drawParams.lineWidth;
         for (var i = 0; i < x.length - 1; i++) {
             c.beginPath();

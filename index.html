@@ -18,13 +18,14 @@
 </html>
 
 <style>
+    
     #main {
         height: 100vh;
         width: 100vw;
         font-family: 'Josefin Sans', sans-serif;
-        color: white;
+        color: black;
         text-align: center;
-        background: url(img/png/49.png);
+        background: url(img/png/46.png);        
     }
     a {
         color: grey;
@@ -41,33 +42,47 @@
         margin: 0 0;
         padding: 0 0;
     }
-    #container-1 {
-        width: 70%;
+    #display-container {
+        width: 68%;
         height: 100%;
-/*        background: url(img/png/49.png);*/
-/*        49*/
         float:left;
         text-align: center;
+        box-sizing: border-box;
         
     }
-    #container-2 {
+    #ui-container {
+        position: relative;
         float:left;
         width: 30%;
         height: 100%;
-/*        background: black;*/
-/*        background: url(img/png/49.png);*/
+        border-right: 1px black solid;
+        background: rgba(220, 217, 255, 0.4);
     }
-    #container-1 canvas {
+    #ui-container * {
+        z-index: 20;
+        position: relative;
+    }
+    #ui-background {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(26, 42, 111, 0.28);
+        opacity: 0.0;
+        z-index: 0;
+    }
+    #display-container canvas {
         margin-top: 20px;
         display:inline;
     }
-    #container-2 canvas {
+    #ui-container canvas {
         height: 150px;
         width: 150px; 
         opacity: 0.4;
         transition-duration: .5s;
     }
-    #container-2 canvas:hover {
+    #ui-container canvas:hover {
         opacity: 0.7;
         transition-property: all;
         transition-duration: .5s;
