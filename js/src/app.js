@@ -1,5 +1,6 @@
 /** @jsx React.DOM */
 
+var globalX = true;
 // Prepare mixins which allow React components to trigger actions and read/sync-with data stores
 var FluxMixin = Fluxxor.FluxMixin(React),
     FluxChildMixin = Fluxxor.FluxChildMixin(React),
@@ -29,7 +30,7 @@ var App = React.createClass ({
         };
         var n = this.state.nGuilloches;
         var display = (<Guilloche id={-1} size={750} pattern={this.state.patterns[this.state.activePattern]} drawParams={{opacity:.05,lineWidth:1,color:"blue"}} update={true}/>);
-        display = [];
+//        display = [];
         return (
             <div id="main">
                 <div id="ui-container">
