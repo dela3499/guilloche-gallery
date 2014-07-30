@@ -163,7 +163,7 @@ var AppStore = Fluxxor.createStore({
         });
         
         // Add thumbnails one-by-one after page loads
-        var period = 300; // add thumbnail every period milliseconds
+        var period = 600; // add thumbnail every period milliseconds
         var nPeriods = Math.ceil((new Date().getTime() - this.startTime)/period);
         if ((nPeriods > this.nGuilloches) && (nPeriods <= this.patterns.length) ) {
             this.nGuilloches = nPeriods;
