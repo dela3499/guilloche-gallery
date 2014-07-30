@@ -1,7 +1,5 @@
 /** @jsx React.DOM */
 
-
-
 // Prepare mixins which allow React components to trigger actions and read/sync-with data stores
 var FluxMixin = Fluxxor.FluxMixin(React),
     FluxChildMixin = Fluxxor.FluxChildMixin(React),
@@ -13,29 +11,40 @@ var App = React.createClass ({
         var flux = this.getFlux();
         return {
             activePattern: flux.store("AppStore").activePattern,
-            patterns: flux.store("AppStore").patterns
+            patterns: flux.store("AppStore").patterns,
+            nGuilloches: flux.store("AppStore").nGuilloches
         }
-    },  
+    },
     render: function () {
         var thumbnails = [];
-        for (var i = 0; i < this.state.patterns.length; i++) {
-            thumbnails.push(<Guilloche id={i} size={150} pattern={this.state.patterns[i]} options={config.options[i]} drawParams={{opacity:.05,lineWidth:1,color:"black"}} update={i==this.state.activePattern}/>);
+        for (var i = 0; i < this.state.nGuilloches; i++) {thumbnails.push(
+            <Guilloche 
+                id={i} 
+                size={150} 
+                pattern={this.state.patterns[i]} 
+                options={config.options[i]} 
+                drawParams={{opacity:.05,lineWidth:1,color:"black"}} 
+                update={i==this.state.activePattern}
+            />);
         };
+        var n = this.state.nGuilloches;
+        var display = (<Guilloche id={-1} size={750} pattern={this.state.patterns[this.state.activePattern]} drawParams={{opacity:.05,lineWidth:1,color:"blue"}} update={true}/>);
+        display = [];
         return (
             <div id="main">
                 <div id="ui-container">
                     <div id="text-container">
                         <div id="ui-background"></div>        
                         <h1>GUILLOCHE GALLERY</h1>
-                        <h2>made by <a href="#" target="_blank">@dela3499</a> and inspired by <a href="http://www.subblue.com/projects/guilloche" target="_blank" >subblue</a> 
+                        <h2>made by <a href="http://carlosd.ghost.io/" target="_blank">@dela3499</a> and inspired by <a href="http://www.subblue.com/projects/guilloche" target="_blank" >subblue</a> 
                         </h2>
                     </div>
                     <div id="thumbnail-container">
-                    {thumbnails}
+                        {thumbnails}
                     </div>
                 </div>
                 <div id="display-container">
-                    <Guilloche id={-1} size={750} pattern={this.state.patterns[this.state.activePattern]} drawParams={{opacity:.05,lineWidth:1,color:"blue"}} update={true}/>
+                    {display}
                 </div>                            
             </div>
         );
@@ -105,6 +114,8 @@ var AppStore = Fluxxor.createStore({
         this.animations = [];
         this.patterns = [];
         this.activePattern = 0;
+        this.nGuilloches = 0;
+        this.startTime = new Date().getTime();
         for (var i = 0; i < 12; i++) {
             this.patterns.push(getGuilloche({}));
         };
@@ -149,6 +160,15 @@ var AppStore = Fluxxor.createStore({
                 store.emit("change");
             };
         });
+        
+        // Add thumbnails one-by-one after page loads
+        var period = 300; // add thumbnail every period milliseconds
+        var nPeriods = Math.ceil((new Date().getTime() - this.startTime)/period);
+        if ((nPeriods > this.nGuilloches) && (nPeriods <= this.patterns.length) ) {
+            this.nGuilloches = nPeriods;
+            this.emit('change');
+        };
+        
         requestAnimationFrame(this.update);
     },
         
