@@ -35,22 +35,16 @@
     }
     #text-container {
         background: rgb(27, 27, 51);
+        opacity: .8;
     },
-    #display-container {
-        width: 68%;
-        height: 100%;
-        float:left;
-        text-align: center;
-        box-sizing: border-box;
-        
-    }
     #ui-container {
+/*
         position: relative;
         float:left;
         width: 30%;
         height: 100%;
         border-right: 1px rgba(29, 58, 137, 0.29) solid;
-        background: rgba(220, 217, 255, 0.4);
+*/
     }
     #ui-container * {
         z-index: 20;
@@ -72,8 +66,8 @@
     }
     #ui-container canvas {
         float: left;
-        height: 150px;
-        width: 150px; 
+        height: 250px;
+        width: 250px; 
         transition-property: all;
         transition-duration: .5s;
         opacity: 0.4;
@@ -85,7 +79,6 @@
     }
     
     #thumbnail-container {
-        width: 450px;
         margin: 0 auto;
         margin-top: 20px;
 </style>
