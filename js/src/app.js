@@ -36,7 +36,7 @@ var App = React.createClass ({
                 <div id="ui-container">
                     <div id="text-container">
                         <div id="ui-background"></div>        
-                        <h1>GUILLOCHE GALLERY</h1>
+                        <h1>Guilloche Gallery</h1>
                         <h2>made by <a href="http://carlosd.ghost.io/" target="_blank">@dela3499</a> and inspired by <a href="http://www.subblue.com/projects/guilloche" target="_blank" >subblue</a> 
                         </h2>
                     </div>

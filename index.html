@@ -3,6 +3,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
     <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,200,900' rel='stylesheet' type='text/css'>
     <style>
     
     #main {
@@ -11,7 +12,7 @@
         font-family: 'Josefin Sans', sans-serif;
         color: hsla(222, 100%, 96%, 0.73);
         text-align: center;
-        background: url(img/46.png);        
+        background: url(img/png/19.png);        
     }
     a {
         color: hsl(205, 5%, 82%);
@@ -26,26 +27,20 @@
         margin: 0 0;
         padding: 0 0;
         padding-top: 25px;
+        font-family: 'Raleway';
+        font-weight: 100;
     }
     h2 {
         font-size: 20px;
         margin: 0 0;
         padding: 0 0;
-        padding-bottom: 20px;
+        padding-bottom: 30px;
     }
     #text-container {
-        background: rgb(27, 27, 51);
-        opacity: .8;
+        background: rgb(0, 0, 0);
+        opacity: 1;
+        border-bottom: 1px solid white;
     },
-    #ui-container {
-/*
-        position: relative;
-        float:left;
-        width: 30%;
-        height: 100%;
-        border-right: 1px rgba(29, 58, 137, 0.29) solid;
-*/
-    }
     #ui-container * {
         z-index: 20;
         position: relative;
@@ -60,27 +55,23 @@
         opacity: 0.0;
         z-index: 0;
     }
-    #display-container canvas {
-        margin-top: 20px;
-        display:inline;
-    }
     #ui-container canvas {
-        float: left;
+/*        float: left;*/
         height: 250px;
         width: 250px; 
         transition-property: all;
         transition-duration: .5s;
-        opacity: 0.4;
+        opacity: 0.8;
     }
     #ui-container canvas:hover {
-        opacity: 0.7;
+        opacity: 1;
         transition-property: all;
         transition-duration: .5s;
     }
     
     #thumbnail-container {
         margin: 0 auto;
-        margin-top: 20px;
+        margin-top: 60px;
 </style>
 </head>
 <body>

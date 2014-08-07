@@ -36,7 +36,7 @@ var App = React.createClass ({displayName: 'App',
                 React.DOM.div({id: "ui-container"}, 
                     React.DOM.div({id: "text-container"}, 
                         React.DOM.div({id: "ui-background"}), 
-                        React.DOM.h1(null, "GUILLOCHE GALLERY"), 
+                        React.DOM.h1(null, "Guilloche Gallery"), 
                         React.DOM.h2(null, "made by ", React.DOM.a({href: "http://carlosd.ghost.io/", target: "_blank"}, "@dela3499"), " and inspired by ", React.DOM.a({href: "http://www.subblue.com/projects/guilloche", target: "_blank"}, "subblue")
                         )
                     ), 
