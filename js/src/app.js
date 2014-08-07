@@ -21,7 +21,7 @@ var App = React.createClass ({
         for (var i = 0; i < this.state.nGuilloches; i++) {thumbnails.push(
             <Guilloche 
                 id={i} 
-                size={150} 
+                size={250} 
                 pattern={this.state.patterns[i]} 
                 options={config.options[i]} 
                 drawParams={{opacity:.05,lineWidth:1,color:"black"}} 
@@ -43,10 +43,7 @@ var App = React.createClass ({
                     <div id="thumbnail-container">
                         {thumbnails}
                     </div>
-                </div>
-                <div id="display-container">
-                    {display}
-                </div>                            
+                </div>      
             </div>
         );
     }
